@@ -1,12 +1,22 @@
-# ============ 文档（按需忽略）============
-docs/
+# ================================================================
+# 仓库结构（2026-09-27 重组后）
+#   archive/        老方向（抗对抗样本病虫害识别 App）的全部资料，仅作存档
+#   yolov8-quat/    新方向（四元数卷积改进 YOLOv8 叶片病害光照鲁棒性检测）
+# ================================================================
+
+# ============ 文档 ============
+# 只忽略老方向归档里的文档；新方向的文档默认纳入版本库。
+# 注意：这里必须写 /archive/docs/ 而不是裸的 docs/——
+# 裸写法会匹配任意层级的 docs 目录，把 yolov8-quat/docs/ 也一起忽略掉。
+/archive/docs/
 
 # ============ 数据集（体积大，不进版本库）============
-# 开头的 / 是关键：不加会被当成"任意层级的 data 目录"，
-# 连带把 training/dataset/（数据准备代码）和 backend/data/（病虫害知识库）
-# 一起忽略掉——代码会被静默排除在版本库之外。
-/data/
-/dataset/
+# 这两条不锚定到根，即"任意层级下的 data/ 或 datasets/ 都忽略"。
+# 这是有意为之：新方向的 YOLO 数据集动辄几 GB，宽口径能防止误提交。
+# 代价：仓库内任何叫 data/ 的目录都会被忽略，包括里面想跟踪的小配置文件。
+# 确有需要时用 `git add -f <文件>` 强制加入。
+data/
+datasets/
 *.zip
 *.tar
 *.tar.gz
@@ -19,6 +29,8 @@ docs/
 *.onnx
 *.tflite
 *.ckpt
+*.engine
+*.mlpackage
 checkpoints/
 weights/
 
@@ -34,20 +46,15 @@ env/
 .mypy_cache/
 .ruff_cache/
 
-# ============ 运行输出与日志 ============
+# ============ 训练输出与日志 ============
+# ultralytics(YOLO) 默认把训练结果写到 runs/ 下，同样不进版本库
 logs/
 *.log
 runs/
 outputs/
+wandb/
 
-# ============ Flutter / Dart ============
-frontend/.dart_tool/
-frontend/.flutter-plugins
-frontend/.flutter-plugins-dependencies
-frontend/build/
-frontend/.packages
-frontend/ios/Pods/
-frontend/android/.gradle/
+# ============ 编辑器 / IDE ============
 *.iml
 .idea/
 .vscode/
