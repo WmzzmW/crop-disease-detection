@@ -1,0 +1,68 @@
+# ============ 文档（按需忽略）============
+docs/
+
+# ============ 数据集（体积大，不进版本库）============
+# 开头的 / 是关键：不加会被当成"任意层级的 data 目录"，
+# 连带把 training/dataset/（数据准备代码）和 backend/data/（病虫害知识库）
+# 一起忽略掉——代码会被静默排除在版本库之外。
+/data/
+/dataset/
+*.zip
+*.tar
+*.tar.gz
+
+# ============ 模型权重（可重新训练得到）============
+*.pth
+*.pt
+*.h5
+*.keras
+*.onnx
+*.tflite
+*.ckpt
+checkpoints/
+weights/
+
+# ============ Python ============
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+.ipynb_checkpoints/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ============ 运行输出与日志 ============
+logs/
+*.log
+runs/
+outputs/
+
+# ============ Flutter / Dart ============
+frontend/.dart_tool/
+frontend/.flutter-plugins
+frontend/.flutter-plugins-dependencies
+frontend/build/
+frontend/.packages
+frontend/ios/Pods/
+frontend/android/.gradle/
+*.iml
+.idea/
+.vscode/
+
+# ============ 环境变量与密钥 ============
+.env
+.env.*
+*.local
+
+# ============ macOS ============
+.DS_Store
+.AppleDouble
+._*
+
+# ============ 临时文件 ============
+tmp/
+*.tmp
+*.bak
